@@ -19,13 +19,6 @@ const listMarcap = galleryItems.map(({ preview, original, description }) => {
 
 list.insertAdjacentHTML("afterbegin", listMarcap);
 
-// list.addEventListener('click', showPhotoSlider);
-
-// function showPhotoSlider(event) {
-//     event.preventDefault();
-
-// };
-
  const lightbox = new SimpleLightbox('.gallery a', { animationSpeed: 150,captionsData: 'alt', captionDelay: 250,});
 
 
