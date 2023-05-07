@@ -24,34 +24,24 @@ list.addEventListener('click', showOriginalSize);
 
 function showOriginalSize(event) {
     event.preventDefault();
-    //console.log(event.target);
-    //console.log(event.currentTarget);
     const urlOriginal = event.target.dataset.source;
-    const modal = basicLightbox.create(`<img src="${urlOriginal}">`)
+    const modal = basicLightbox.create(`<img src="${urlOriginal}">`,{closable: true})
     if (event.target !== event.currentTarget) {
         modal.show()
     } 
 
     window.addEventListener('keydown', closeOriginalSizeByEsc);
     function closeOriginalSizeByEsc(event) {
-         
+
         if (event.code !== 'Escape') {
-              return
+            return
         }
-
-     window.removeEventListener('keydown', closeOriginalSizeByEsc)
-     modal.close()
+        window.removeEventListener('keydown', closeOriginalSizeByEsc)
+        modal.close();
        
-     console.log(event.code);
     }
-
+  
 }
 
-
-
-
-// function closeOriginalSizeByEsc(event) {
-//     // modal.close()
-//     console.log(event);
-// }
-
+//{onClose: (instance) => {}}
+//{onShow: (instance) => {}}
