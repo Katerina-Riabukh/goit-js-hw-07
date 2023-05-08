@@ -3,6 +3,7 @@ import { galleryItems } from './gallery-items.js';
 
 const list = document.querySelector('.gallery');
 
+
 const listMarcap = galleryItems.map(({ preview, original, description }) => {
 
         return ` <li class="gallery__item">
@@ -24,24 +25,29 @@ list.addEventListener('click', showOriginalSize);
 
 function showOriginalSize(event) {
     event.preventDefault();
-    const urlOriginal = event.target.dataset.source;
-    const modal = basicLightbox.create(`<img src="${urlOriginal}">`,{closable: true})
-    if (event.target !== event.currentTarget) {
-        modal.show()
-    } 
 
-    window.addEventListener('keydown', closeOriginalSizeByEsc);
+    console.log(event.target);
+
+    if (event.target.nodeName !== "IMG") {
+        return
+    }
+
+   const modal = basicLightbox.create(`<img src="${event.target.dataset.source}"/>`, 
+    { onShow: (modal) => {document.addEventListener('keydown', closeOriginalSizeByEsc)},
+
+      onClose: (modal) => { document.removeEventListener('keydown', closeOriginalSizeByEsc) }
+    })
+    
+   modal.show()
+   
     function closeOriginalSizeByEsc(event) {
 
         if (event.code !== 'Escape') {
             return
         }
-        window.removeEventListener('keydown', closeOriginalSizeByEsc)
+
         modal.close();
-       
     }
-  
 }
 
-//{onClose: (instance) => {}}
-//{onShow: (instance) => {}}
+
